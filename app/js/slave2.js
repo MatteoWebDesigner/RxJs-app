@@ -1,11 +1,35 @@
-App.slave2 = (function(){
-  function constructor () {
-    this.name = 'Slave2';
+App.slave2 = (function() {
+    // factory
+    function constructor() {
+        var self = this,
+            subscription;
 
-    this.init();
-  }
+        this.name = 'Slave2';
 
-  constructor.prototype = App.master.prototype;
+        this.sendMessage = function () {
+            self.emitEvent(
+                'Master',
+                { message: 'ciao I am ' + self.name }
+            );
+        }
 
-  return constructor;
+        // init
+        this.init(function(){
+            subscription = subject
+                .filter(function(res){
+                    return res.event === self.name;
+                })
+                .subscribe(self.onEvent.bind(this));
+        }.bind(this));
+    }
+    
+    // inherit
+    constructor.prototype = App.master.prototype;
+
+    // extend
+    _.assign(constructor.prototype,{
+
+    });
+
+    return constructor;
 })();

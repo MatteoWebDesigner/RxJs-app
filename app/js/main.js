@@ -1,2 +1,2 @@
 var App = {};
-var subject = new Rx.Subject();
+var subject = new Rx.ReplaySubject(1);

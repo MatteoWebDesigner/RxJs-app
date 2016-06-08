@@ -1,17 +1,12 @@
-(function(){
-  // init master
-  var master = new App.master();
+(function() {
+    // init master
+    var master = new App.master();
 
-  master.action();
+    master.sendMessage();
 
-  // init slaves
-  var slave = new App.slave();
-  var slave2 = new App.slave2();
+    // init slaves
+    var slave = new App.slave();
+    var slave2 = new App.slave2();
 
-  subject.onNext({
-    id: 'global',
-    data: 'ciao gianni'
-  });
-
-  //setTimeout(function(){  }, 2000);
+    //setTimeout(function(){  }, 2000);
 })();
