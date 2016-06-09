@@ -1,13 +1,13 @@
 App.master = (function() {
     var _privateMod = 'privateModule';
-    
+
     // factory
-    function constructor() {
+    function constructor(opts) {
         var self = this,
-            _privateIns = 'privateInstance',
-            subscription;
+            _privateIns = 'privateInstance';
 
         this.name = 'Master';
+        this.channel = ChannelManager.subscribe(opts.channel);
 
         this.sendMessage = function () {
             self.emitEvent(
@@ -15,11 +15,12 @@ App.master = (function() {
                 { message: 'ciao It\'s a message from ' + self.name }
             );
         }
-        
+
         // init
         this.init(function(){
 
-            subscription = subject
+            // listen
+            this.channel
                 .filter(function(res){
                     return res.event === self.name;
                 })
@@ -27,7 +28,7 @@ App.master = (function() {
 
         }.bind(this));
     }
-    
+
     // prototype
     constructor.prototype = {
         init: function(cb) {
@@ -39,7 +40,7 @@ App.master = (function() {
         },
         emitEvent: function(event, data) {
             console.log(this.name + ': Emit Action');
-            subject.onNext({
+            this.channel.onNext({
                 event: event,
                 data: data
             });
@@ -48,7 +49,7 @@ App.master = (function() {
             console.log(this.name + ': Event received: ' + res.data.message);
         }
     };
-    
+
     // extend
     _.assign(constructor.prototype,{
 

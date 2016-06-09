@@ -1,10 +1,11 @@
 App.slave = (function() {
     // factory
-    function constructor() {
+    function constructor(opts) {
         var self = this,
-            subscription; 
+            subscription;
 
         this.name = 'Slave';
+        this.channel = ChannelManager.subscribe(opts.channel);
 
         this.sendMessage = function () {
             self.emitEvent(
@@ -15,11 +16,14 @@ App.slave = (function() {
 
         // init
         this.init(function(){
-            subscription = subject
+
+            // listen
+            this.channel
                 .filter(function(res){
                     return res.event === self.name;
                 })
                 .subscribe(self.onEvent.bind(this));
+
         }.bind(this));
     }
 
