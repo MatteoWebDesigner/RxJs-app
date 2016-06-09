@@ -1,11 +1,17 @@
 App.slave2 = (function() {
+    var eventNames = {
+        INIT: 'slave2Init',
+        INJECT: 'slave2Inject',
+        CHANGE: 'slave2Change'
+    };
+
     // factory
     function constructor(opts) {
         var self = this,
             subscription;
 
-        this.name = 'Slave2';
-        this.channel = ChannelManager.subscribe(opts.channel);
+        this.name = opts.name || 'Slave2';
+        this.channel = App.ChannelManager.subscribe(opts.channel);
 
         this.sendMessage = function () {
             self.emitEvent(
@@ -31,9 +37,9 @@ App.slave2 = (function() {
     constructor.prototype = App.master.prototype;
 
     // extend
-    _.assign(constructor.prototype,{
-
-    });
+    // _.assign(constructor.prototype,{
+    // 
+    // });
 
     return constructor;
 })();

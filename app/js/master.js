@@ -1,5 +1,9 @@
 App.master = (function() {
-    var _privateMod = 'privateModule';
+    var eventNames = {
+        INIT: 'masterInit',
+        INJECT: 'masterInject',
+        CHANGE: 'masterChange'
+    };
 
     // factory
     function constructor(opts) {
@@ -7,7 +11,7 @@ App.master = (function() {
             _privateIns = 'privateInstance';
 
         this.name = 'Master';
-        this.channel = ChannelManager.subscribe(opts.channel);
+        this.channel = App.ChannelManager.subscribe(opts.channel);
 
         this.sendMessage = function () {
             self.emitEvent(
@@ -27,12 +31,27 @@ App.master = (function() {
                 .subscribe(self.onEvent.bind(this));
 
         }.bind(this));
+
+        // this.destroy(function(){
+        // 
+        //     // listen
+        //     this.channel
+        //         .filter(function(res){
+        //             return res.event === self.name;
+        //         })
+        //         .subscribe(self.onEvent.bind(this));
+        // 
+        // }.bind(this));
     }
 
     // prototype
     constructor.prototype = {
         init: function(cb) {
             console.log(this.name + ': Init');
+            if (cb) cb();
+        },
+        destroy: function(cb) {
+            console.log(this.name + ': Destory');
             if (cb) cb();
         },
         action: function() {
@@ -51,9 +70,9 @@ App.master = (function() {
     };
 
     // extend
-    _.assign(constructor.prototype,{
-
-    });
+    // _.assign(constructor.prototype,{
+    // 
+    // });
 
     return constructor;
 })();

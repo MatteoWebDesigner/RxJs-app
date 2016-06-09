@@ -1,11 +1,17 @@
 App.slave = (function() {
+    var eventNames = {
+        INIT: 'slaveInit',
+        INJECT: 'slaveInject',
+        CHANGE: 'slaveChange'
+    };
+
     // factory
     function constructor(opts) {
         var self = this,
             subscription;
 
+        this.channel = App.ChannelManager.subscribe(opts.channel);
         this.name = 'Slave';
-        this.channel = ChannelManager.subscribe(opts.channel);
 
         this.sendMessage = function () {
             self.emitEvent(
@@ -18,11 +24,13 @@ App.slave = (function() {
         this.init(function(){
 
             // listen
-            this.channel
+            var store = this.channel
                 .filter(function(res){
                     return res.event === self.name;
                 })
                 .subscribe(self.onEvent.bind(this));
+
+            store;
 
         }.bind(this));
     }
@@ -31,9 +39,9 @@ App.slave = (function() {
     constructor.prototype = App.master.prototype;
 
     // extend
-    _.assign(constructor.prototype,{
-
-    });
+    // _.assign(constructor.prototype,{
+    // 
+    // });
 
     return constructor;
 })();

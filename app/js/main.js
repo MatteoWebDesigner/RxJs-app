@@ -1,5 +1,5 @@
 var App = {};
-var ChannelManager = {
+App.ChannelManager = {
     list: {},
     subscribe: function(channelName) {
         var subscription;

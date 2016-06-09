@@ -1,12 +1,9 @@
 (function() {
-    // init master
+    // application bootstrap
     var master = new App.master({
         channel: 'alpha'
     });
 
-    master.sendMessage();
-
-    // init slaves
     var slave = new App.slave({
         channel: 'alpha'
     });
@@ -15,5 +12,18 @@
         channel: 'alpha'
     });
 
-    //setTimeout(function(){  }, 2000);
+    var enemy = new App.slave2({
+        channel: 'beta',
+        name: 'Enemy'
+    });
+
+    // user handle actions
+    master.sendMessage();
+
+    slave.sendMessage();
+
+    enemy.sendMessage();
+    
+    // destory component
+    //master.destroy();
 })();
