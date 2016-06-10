@@ -1,47 +1,42 @@
-App.slave = (function() {
-    var eventNames = {
-        INIT: 'slaveInit',
-        INJECT: 'slaveInject',
-        CHANGE: 'slaveChange'
-    };
+import ChannelManager from './channelManager.js';
+import Master from './master.js';
 
-    // factory
-    function constructor(opts) {
-        var self = this,
-            subscription;
+// factory
+function constructor(opts) {
+    var self = this,
+        subscription;
 
-        this.channel = App.ChannelManager.subscribe(opts.channel);
-        this.name = 'Slave';
+    this.channel = ChannelManager.subscribe(opts.channel);
+    this.name = 'Slave';
 
-        this.sendMessage = function () {
-            self.emitEvent(
-                'Master',
-                { message: 'ciao I am ' + self.name }
-            );
-        }
-
-        // init
-        this.init(function(){
-
-            // listen
-            var store = this.channel
-                .filter(function(res){
-                    return res.event === self.name;
-                })
-                .subscribe(self.onEvent.bind(this));
-
-            store;
-
-        }.bind(this));
+    this.sendMessage = function () {
+        self.emitEvent(
+            'Master',
+            { message: 'ciao I am ' + self.name }
+        );
     }
 
-    // inherit
-    constructor.prototype = App.master.prototype;
+    // init
+    this.init(function(){
 
-    // extend
-    // _.assign(constructor.prototype,{
-    // 
-    // });
+        // listen
+        var subscribtion = this.channel
+            .filter(function(res){
+                return res.event === self.name;
+            })
+            .subscribe(self.onEvent.bind(this));
 
-    return constructor;
-})();
+        //subscribtion.dispose();
+
+    }.bind(this));
+}
+
+// inherit
+constructor.prototype = Master.prototype;
+
+// extend
+// _.assign(constructor.prototype,{
+//
+// });
+
+export default constructor;
