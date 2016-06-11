@@ -1,5 +1,5 @@
 # Init
-Static exercise to try RxJs :)
+RxJs exercise :)
 
 Run server
 > npm install  
