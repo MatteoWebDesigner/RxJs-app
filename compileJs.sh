@@ -1,1 +1,1 @@
-watchify app/js/main.js --debug -o app/bundle.js -t [ babelify --presets [ es2015 ] ];
+NODE_PATH=./app/js/ watchify app/js/main.js --debug -o app/bundle.js -t [ babelify --presets [ es2015 ] ];

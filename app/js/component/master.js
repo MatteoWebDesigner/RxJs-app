@@ -1,4 +1,4 @@
-import ChannelManager from '../event-manager/channelManager.js';
+import ChannelManager from 'core/channelManager.js';
 
 // factory
 function constructor(opts) {
