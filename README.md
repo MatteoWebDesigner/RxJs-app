@@ -1,10 +1,12 @@
 # Init
 RxJs exercise :)
 
-Run server
+Install dependencies
 > npm install  
 npm install browserify -g  
-http-server app
 
 Compile and watch JS
 > ./compileJs.sh
+
+Run server
+> http-server app

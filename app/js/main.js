@@ -33,4 +33,4 @@ slaveInstance.sendMessage();
 enemyInstance.sendMessage();
 
 // destory component
-//masterIstance.destroy();
+// masterIstance.destroy();
