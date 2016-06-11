@@ -1,5 +1,5 @@
-import ChannelManager from './channelManager.js';
-import Master from './master.js';
+import ChannelManager from '../event-manager/channelManager.js';
+import Master         from './master.js';
 
 // factory
 function constructor(opts) {

@@ -1,4 +1,4 @@
-import ChannelManager from './channelManager.js';
+import ChannelManager from '../event-manager/channelManager.js';
 
 // factory
 function constructor(opts) {
@@ -53,14 +53,14 @@ constructor.prototype = {
         console.log(this.name + ': Action');
     },
     emitEvent: function(event, data) {
-        console.log(this.name + ': Emit Action');
+        console.log(this.name + ': Emit Action =>');
         this.channel.onNext({
             event: event,
             data: data
         });
     },
     onEvent: function(res) {
-        console.log(this.name + ': Event received: ' + res.data.message);
+        console.log(this.name + ': <= Event received: ' + res.data.message);
     }
 };
 

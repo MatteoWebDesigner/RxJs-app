@@ -1,6 +1,6 @@
-import Master from './master.js';
-import Slave from './slave.js';
-import Slave2 from './slave2.js';
+import Master from './component/master.js';
+import Slave  from './component/slave.js';
+import Slave2 from './component/slave2.js';
 
 var masterIstance,
     slaveInstance,
