@@ -1,66 +1,27 @@
 import ChannelManager from 'core/channelManager.js';
 
-// factory
+/**
+ * constructor - description
+ *  
+ * @param  {object} opts = {channel: 'channelName',name: 'componentName'}
+ */
 function constructor(opts) {
-    var self = this,
-        _privateIns = 'privateInstance';
+    var channel;
 
     this.name = 'Master';
-    this.channel = ChannelManager.subscribe(opts.channel);
+    this.channelName = opts.channel || this.name;
+    channel = ChannelManager.setChannel(this.channelName);
 
-    this.sendMessage = function () {
-        self.emitEvent(
-            'Slave2',
-            { message: 'ciao It\'s a message from ' + self.name }
-        );
-    }
+    
 
     // init
-    this.init(function(){
-
-        // listen
-        this.channel
-            .filter(function(res){
-                return res.event === self.name;
-            })
-            .subscribe(self.onEvent.bind(this));
-
-    }.bind(this));
-
-    // this.destroy(function(){
-    //
-    //     // listen
-    //     this.channel
-    //         .filter(function(res){
-    //             return res.event === self.name;
-    //         })
-    //         .subscribe(self.onEvent.bind(this));
-    //
-    // }.bind(this));
+    this.initLog();
 }
 
 // prototype
 constructor.prototype = {
-    init: function(cb) {
-        console.log(this.name + ': Init');
-        if (cb) cb();
-    },
-    destroy: function(cb) {
-        console.log(this.name + ': Destory');
-        if (cb) cb();
-    },
-    action: function() {
-        console.log(this.name + ': Action');
-    },
-    emitEvent: function(event, data) {
-        console.log(this.name + ': Emit Action =>');
-        this.channel.onNext({
-            event: event,
-            data: data
-        });
-    },
-    onEvent: function(res) {
-        console.log(this.name + ': <= Event received: ' + res.data.message);
+    initLog() {
+        console.log(`$(this.name): init`);
     }
 };
 

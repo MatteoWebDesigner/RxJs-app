@@ -17,16 +17,7 @@ function constructor(opts) {
     }
 
     // init
-    this.init(function(){
-
-        // listen
-        this.channel
-            .filter(function(res){
-                return res.event === self.name;
-            })
-            .subscribe(self.onEvent.bind(this));
-
-    }.bind(this));
+    this.initLog();
 }
 
 // inherit

@@ -9,26 +9,8 @@ function constructor(opts) {
     this.channel = ChannelManager.subscribe(opts.channel);
     this.name = 'Slave';
 
-    this.sendMessage = function () {
-        self.emitEvent(
-            'Master',
-            { message: 'ciao I am ' + self.name }
-        );
-    }
-
     // init
-    this.init(function(){
-
-        // listen
-        var subscribtion = this.channel
-            .filter(function(res){
-                return res.event === self.name;
-            })
-            .subscribe(self.onEvent.bind(this));
-
-        //subscribtion.dispose();
-
-    }.bind(this));
+    this.initLog();
 }
 
 // inherit
