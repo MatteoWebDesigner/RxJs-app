@@ -1,5 +1,7 @@
-export default {
+const slave2Events = {
     INIT: 'slave2Init',
-    INJECT: 'slave2Inject',
-    CHANGE: 'slave2Change'
+    ON_INJECT: 'slaveOnInject',
+    ON_CHANGE: 'slave2OnChange'
 };
+
+export default slave2Events;

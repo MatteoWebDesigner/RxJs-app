@@ -1,5 +1,7 @@
-export default {
+const slaveEvents = {
     INIT: 'slaveInit',
-    INJECT: 'slaveInject',
-    CHANGE: 'slaveChange'
+    ON_INJECT: 'slaveOnInject',
+    ON_CHANGE: 'slaveOnChange',
 };
+
+export default slaveEvents;

@@ -9,41 +9,6 @@ var masterIstance,
     slave2Instance,
     enemyInstance;
 
-
-// working on channel manager
-var channelAplha = ChannelManager.setChannel('alpha');
-
-// channelAplha.emit('eventName', {
-//     data: 'dataSent to private channel'
-// });
-// globalChannel.emit('eventName', {
-//     data: 'dataSent to global channel'
-// });
-
-channelAplha.on('eventName', (res) => {
-    console.log('fresh:',res);
-});
-
-channelAplha.onReplay('eventName', (res) => {
-    console.log('replay:',res);
-});
-
-globalChannel.on('eventName', (res) => {
-    console.log('fresh:',res);
-});
-
-globalChannel.onReplay('eventName', (res) => {
-    console.log('replay:',res);
-});
-
-channelAplha.emit('eventName', {
-    data: 'dataSent to private channel'
-});
-globalChannel.emit('eventName', {
-    data: 'dataSent to global channel'
-});
-
-
 /*
     
     story: 
@@ -65,30 +30,27 @@ globalChannel.emit('eventName', {
 
  */
 
-// application bootstrap
-// masterIstance = new Master({
-//     channel: 'alpha'
-// });
-// 
-// masterIstance.sendInit();
+// app bootstrap
+masterIstance = new Master({
+    channel: 'alpha'
+});
 
-// slaveInstance = new Slave({
-//     channel: 'alpha'
-// });
-// 
-// slave2Instance = new Slave2({
-//     channel: 'alpha'
-// });
+masterIstance.sendInitData();
 
-// enemyInstance = new Slave2({
-//     channel: 'beta',
-//     name: 'Enemy'
-// });
+slaveInstance = new Slave({
+    channel: 'alpha'
+});
 
-// user handle actions
-// slaveInstance.sendMessage();
-// 
-// enemyInstance.sendMessage();
+slave2Instance = new Slave2({
+    channel: 'alpha'
+});
 
-// destory component
-// masterIstance.destroy();
+enemyInstance = new Slave2({
+    channel: 'beta',
+    name: 'Enemy'
+});
+
+// user actions
+masterIstance.handleAction();
+
+slaveInstance.handleAction();
